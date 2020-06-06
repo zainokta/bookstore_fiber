@@ -8,18 +8,17 @@ import (
 )
 
 func (b *BookHandler) IndexBook(ctx *fiber.Ctx) {
-	// books, err := b.bookRepo.All()
-	// if err != nil {
-	// 	ctx.Status(500).Send(err)
-	// 	return
-	// }
-	// resp := map[string][]models.Book{"data": books}
+	books, err := b.bookRepo.All()
+	if err != nil {
+		ctx.Status(500).Send(err)
+		return
+	}
+	resp := map[string][]models.Book{"data": books}
 
-	// if err := ctx.JSON(resp); err != nil {
-	// 	ctx.Status(500).Send(err)
-	// 	return
-	// }
-	ctx.Write("Hello")
+	if err := ctx.JSON(resp); err != nil {
+		ctx.Status(500).Send(err)
+		return
+	}
 }
 
 func (b *BookHandler) ShowBook(ctx *fiber.Ctx) {
